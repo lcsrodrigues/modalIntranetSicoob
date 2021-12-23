@@ -43,23 +43,30 @@ export default class ModalSicoobExtensionApplicationCustomizer
         return;
       }
   
-      if (this.properties) {
-        let topString: string = this.properties.Top;
-        if (!topString) {
-          topString = "(Top property was not defined.)";
-        }
-  
         if (this._topPlaceholder.domElement) {
           this._topPlaceholder.domElement.innerHTML = `
           <div class="${styles.app}">
-            <div class="${styles.top}">
-              <i class="ms-Icon ms-Icon--Info" aria-hidden="true"></i> ${escape(
-                topString
-              )}
+            <div class="${styles.container}">
+              <div class="${styles.header}">
+                <div class="${styles.titleHeader}">
+                  <span>Lorem Ipsum</span>
+                </div>
+                <div class="${styles.closeHeader}">
+                  <img src="${require('../../images/close.png')}" />
+                </div>
+              </div>
+              <div class="${styles.content}">
+              <div class="${styles.sideLeft}">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan eu sapien vitae semper. Duis scelerisque mi egestas varius vehicula. Curabitur vel pretium enim, quis aliquam orci. Quisque egestas justo congue, convallis urna ut, tristique libero. In vel faucibus felis, eget tempus quam. Donec iaculis turpis ut felis aliquet ullamcorper at vel sem. Donec mattis sollicitudin turpis eu placerat. Aliquam condimentum sodales sapien et consequat. In hac habitasse platea dictumst.</p>
+              </div>
+              <div class="${styles.sideRight}">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan eu sapien vitae semper. Duis scelerisque mi egestas varius vehicula. Curabitur vel pretium enim, quis aliquam orci. Quisque egestas justo congue, convallis urna ut, tristique libero. In vel faucibus felis, eget tempus quam. Donec iaculis turpis ut felis aliquet ullamcorper at vel sem. Donec mattis sollicitudin turpis eu placerat. Aliquam condimentum sodales sapien et consequat. In hac habitasse platea dictumst.</p>
+              </div>
+              </div>
             </div>
           </div>`;
         }
-      }
+      
     }
   }
 
