@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "modal-sicoob-extension-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/modalSicoobExtension/ModalSicoobExtensionApplicationCustomizer.js",
+          "manifest": "./src/extensions/modalSicoobExtension/ModalSicoobExtensionApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ModalSicoobExtensionApplicationCustomizerStrings": "lib/extensions/modalSicoobExtension/loc/{locale}.js"
+  }
+}

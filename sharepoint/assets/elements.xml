@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="ModalSicoobExtension"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="001b5980-dfd0-485c-8a2b-9368e349ce0e"
+        ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </CustomAction>
+</Elements>
