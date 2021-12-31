@@ -1,17 +1,30 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import styles from './style.module.scss';
+import axios from 'axios';
 
 export default function Modal() {
 
     var isVisibleModal = window.localStorage.getItem("isVisibleModal");
     const [isVisible, setIsVisible] = useState(isVisibleModal == null ? 'true' : isVisibleModal);
+    const [modalDescription, setModalDescription] = useState("");
+    const [modalTitle, setModalTitle] = useState("");
 
     useEffect(() => {
+        function getInfoForModal() {
+            axios.get("https://filenew.sharepoint.com/_api/web/lists/getbytitle('Informações Modal')/items?$top=1&$orderby=ID desc")
+                .then(function (result) {
+                    setModalTitle(result.data.value[0].Title);
+                    setModalDescription(result.data.value[0].DescricaoModal);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
         function visibibleModal() {
             window.localStorage.setItem("isVisibleModal", isVisible);
         }
-
+        getInfoForModal();
         visibibleModal();
     }, [isVisible])
 
@@ -24,7 +37,7 @@ export default function Modal() {
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div className={styles.titleHeader}>
-                        <span>Lorem Ipsum Changed</span>
+                        <span>{modalTitle}</span>
                     </div>
                     <div className={styles.closeHeader} onClick={() => closeModal()}>
                         <img src={require('../../images/close.png')} />
@@ -32,10 +45,10 @@ export default function Modal() {
                 </div>
                 <div className={styles.content}>
                     <div className={styles.sideLeft}>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan eu sapien vitae semper. Duis scelerisque mi egestas varius vehicula. Curabitur vel pretium enim, quis aliquam orci. Quisque egestas justo congue, convallis urna ut, tristique libero. In vel faucibus felis, eget tempus quam. Donec iaculis turpis ut felis aliquet ullamcorper at vel sem. Donec mattis sollicitudin turpis eu placerat. Aliquam condimentum sodales sapien et consequat. In hac habitasse platea dictumst.</p>
+                        <p>{modalDescription}</p>
                     </div>
                     <div className={styles.sideRight}>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan eu sapien vitae semper. Duis scelerisque mi egestas varius vehicula. Curabitur vel pretium enim, quis aliquam orci. Quisque egestas justo congue, convallis urna ut, tristique libero. In vel faucibus felis, eget tempus quam. Donec iaculis turpis ut felis aliquet ullamcorper at vel sem. Donec mattis sollicitudin turpis eu placerat. Aliquam condimentum sodales sapien et consequat. In hac habitasse platea dictumst.</p>
+                        <p>{modalDescription}</p>
                     </div>
                 </div>
             </div>
