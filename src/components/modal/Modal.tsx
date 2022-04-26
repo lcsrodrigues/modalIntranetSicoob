@@ -6,13 +6,13 @@ import axios from 'axios';
 export default function Modal() {
 
     var isVisibleModal = window.localStorage.getItem("isVisibleModal");
-    const [isVisible, setIsVisible] = useState(isVisibleModal == null ? 'true' : isVisibleModal);
+    const [isVisible, setIsVisible] = useState(true);//useState(isVisibleModal == null ? 'true' : isVisibleModal);
     const [modalDescription, setModalDescription] = useState("");
     const [modalTitle, setModalTitle] = useState("");
 
     useEffect(() => {
         function getInfoForModal() {
-            axios.get("https://filenew.sharepoint.com/_api/web/lists/getbytitle('Informações Modal')/items?$top=1&$orderby=ID desc")
+            axios.get("/_api/web/lists/getbytitle('Informações Modal')/items?$top=1&$orderby=ID desc")
                 .then(function (result) {
                     setModalTitle(result.data.value[0].Title);
                     setModalDescription(result.data.value[0].DescricaoModal);
@@ -25,15 +25,16 @@ export default function Modal() {
             window.localStorage.setItem("isVisibleModal", isVisible);
         }
         getInfoForModal();
-        visibibleModal();
+        //visibibleModal();
     }, [isVisible])
 
     function closeModal() {
-        setIsVisible('false');
+        //setIsVisible('false');
+        setIsVisible(false);
     }
 
     return (
-        <div className={styles.app} style={{ 'display': isVisible == 'false' ? 'none' : 'block' }}>
+        <div className={styles.app} style={{ 'display': isVisible == false ? 'none' : 'flex' }}>
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div className={styles.titleHeader}>
@@ -47,9 +48,9 @@ export default function Modal() {
                     <div className={styles.sideLeft}>
                         <p>{modalDescription}</p>
                     </div>
-                    <div className={styles.sideRight}>
+                    {/* <div className={styles.sideRight}>
                         <p>{modalDescription}</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

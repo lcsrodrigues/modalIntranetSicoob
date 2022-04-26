@@ -42,6 +42,7 @@ export default class ModalSicoobExtensionApplicationCustomizer
 
   @override
   public onInit(): Promise<void> {
+    this.context.pageContext.site.serverRelativeUrl;
     this.context.placeholderProvider.changedEvent.add(this, this._renderPlaceHolders);
     return Promise.resolve<void>(null);
   }
