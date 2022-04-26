@@ -12,8 +12,9 @@ export default function Modal() {
 
     useEffect(() => {
         function getInfoForModal() {
-            axios.get("/_api/web/lists/getbytitle('Informações Modal')/items?$top=1&$orderby=ID desc")
+            axios.get("https://crediminas.sharepoint.com/sites/intranet/_api/web/lists/getbytitle('Informações Modal')/items?$top=1&$orderby=ID desc")
                 .then(function (result) {
+                    console.log(result);
                     setModalTitle(result.data.value[0].Title);
                     setModalDescription(result.data.value[0].DescricaoModal);
                 })
@@ -46,7 +47,7 @@ export default function Modal() {
                 </div>
                 <div className={styles.content}>
                     <div className={styles.sideLeft}>
-                        <p>{modalDescription}</p>
+                        <p dangerouslySetInnerHTML={{ __html: modalDescription }} />
                     </div>
                     {/* <div className={styles.sideRight}>
                         <p>{modalDescription}</p>
