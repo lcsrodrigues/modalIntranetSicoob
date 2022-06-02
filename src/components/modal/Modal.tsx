@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default function Modal() {
 
-    // var isVisibleModal = window.localStorage.getItem("isVisibleModal");
+    var isVisibleModal = false;
     const [isVisible, setIsVisible] = useState(true);//useState(isVisibleModal == null ? 'true' : isVisibleModal);
     const [modalTitle, setModalTitle] = useState("");
     const [urlImage, setUrlImage] = useState("");
@@ -13,6 +13,15 @@ export default function Modal() {
     const [backgroundColor, setBackGroundColor] = useState("#00A288");
 
     useEffect(() => {
+        function visibibleModal() {
+            // window.localStorage.setItem("isVisibleModal", isVisible);
+            if (window.location.href === "https://crediminas.sharepoint.com/sites/intranet" && isVisibleModal) {
+
+                setIsVisible(true);
+            } else {
+                setIsVisible(false);
+            }
+        }
         function getInfoForModal() {
             axios.get("https://crediminas.sharepoint.com/sites/intranet/_api/web/lists/getbytitle('Informações Modal')/items?$top=1&$orderby=ID desc")
                 .then((result) => {
@@ -20,22 +29,17 @@ export default function Modal() {
                     setUrlImage(result.data.value[0].urlImagem);
                     setLinkImage(result.data.value[0].linkImagem);
                     setBackGroundColor(result.data.value[0].backgroundColor);
+                    isVisibleModal = result.data.value[0].isVisible;
+
+                    visibibleModal();
                 })
                 .catch((err) => {
                     console.log(err);
                 })
         }
-        function visibibleModal() {
-            // window.localStorage.setItem("isVisibleModal", isVisible);
-            if (window.location.href === "https://crediminas.sharepoint.com/sites/intranet?debug=true&noredir=true&debugManifestsFile=https://localhost:4321/temp/manifests.js") {
 
-                setIsVisible(true);
-            } else {
-                setIsVisible(false);
-            }
-        }
         getInfoForModal();
-        visibibleModal();
+
     }, [])
 
     function closeModal() {
