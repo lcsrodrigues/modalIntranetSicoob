@@ -6,13 +6,15 @@ import axios from 'axios';
 export default function Modal() {
 
     var isVisibleModal = false;
-    const [isVisible, setIsVisible] = useState(true);//useState(isVisibleModal == null ? 'true' : isVisibleModal);
+    const [isVisible, setIsVisible] = useState(false);//useState(isVisibleModal == null ? 'true' : isVisibleModal);
     const [modalTitle, setModalTitle] = useState("");
     const [urlImage, setUrlImage] = useState("");
     const [linkImage, setLinkImage] = useState("");
     const [backgroundColor, setBackGroundColor] = useState("#00A288");
+    const [headerBackgroundColor, setheaderBackGroundColor] = useState("#003642");
 
     useEffect(() => {
+        console.log("Modal Intranet Siccob");
         function visibibleModal() {
             // window.localStorage.setItem("isVisibleModal", isVisible);
             if (window.location.href === "https://crediminas.sharepoint.com/sites/intranet" && isVisibleModal) {
@@ -29,6 +31,7 @@ export default function Modal() {
                     setUrlImage(result.data.value[0].urlImagem);
                     setLinkImage(result.data.value[0].linkImagem);
                     setBackGroundColor(result.data.value[0].backgroundColor);
+                    setheaderBackGroundColor(result.data.value[0].headerBackground);
                     isVisibleModal = result.data.value[0].isVisible;
 
                     visibibleModal();
@@ -50,7 +53,7 @@ export default function Modal() {
     return (
         <div className={styles.app} style={{ 'display': isVisible == false ? 'none' : 'flex' }}>
             <div className={styles.container}>
-                <div className={styles.header}>
+                <div className={styles.header} style={{ backgroundColor: headerBackgroundColor }}>
                     <div className={styles.titleHeader}>
                         <span>{modalTitle}</span>
                     </div>
