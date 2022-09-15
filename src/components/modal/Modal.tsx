@@ -16,7 +16,6 @@ export default function Modal() {
     useEffect(() => {
         console.log("Modal Intranet Siccob");
         function visibibleModal() {
-            // window.localStorage.setItem("isVisibleModal", isVisible);
             if (window.location.href === "https://crediminas.sharepoint.com/sites/intranet" && isVisibleModal) {
 
                 setIsVisible(true);
